@@ -10,7 +10,10 @@ const skipButtons = player.querySelectorAll('[data-skip]')
 const rangers = player.querySelectorAll('.player__slider');
 /* console.log('rangers :>> ', rangers); */
 const progressBar = player.querySelector('.progress__filled');
-console.log('progressBar :>> ', progressBar);
+/* console.log('progressBar :>> ', progressBar); */
+const totalProgress = player.querySelector('.progress')
+console.log('totalProgress :>> ', {totalProgress});
+
 
 // define functions
 function togglePlay () {
@@ -44,6 +47,12 @@ function handleProgress () {
     progressBar.style.flexBasis = `${progressValue}%`
 }
 
+function scrub (e) {
+    
+    const scrubTime = ( e.offsetX/ totalProgress.offsetWidth) * viewer.duration
+    viewer.currentTime = scrubTime
+}
+
 // fire function thanks to event listners
 viewer.addEventListener('click', togglePlay)
 viewer.addEventListener('play', toggleIcon)
@@ -59,5 +68,11 @@ skipButtons.forEach( skipButton => {
 rangers.forEach( ranger => {
     ranger.addEventListener('change', handleChange)
 })
+
+let clikDown = false
+totalProgress.addEventListener('click', scrub)
+totalProgress.addEventListener('mousemove', (e) => clikDown && scrub(e))
+totalProgress.addEventListener('mousedown', () => clikDown =true)
+totalProgress.addEventListener('mouseup', () => clikDown = false)
 
 
