@@ -2,10 +2,11 @@
 //  grab DOM elements
 const player = document.querySelector('.player')
 const viewer = player.querySelector('.viewer')
-console.log('viewer :>> ', {viewer});
-
+/* console.log('viewer :>> ', {viewer}); */
 const playPauseButton = player.querySelector('.toggle')
-console.log('playPauseButton :>> ', {playPauseButton});
+/* console.log('playPauseButton :>> ', {playPauseButton}); */
+const skipButtons = player.querySelectorAll('[data-skip]')
+console.log('skipButtons :>> ', {skipButtons});
 
 
 // define functions
@@ -19,10 +20,15 @@ function togglePlay () {
 }
 
 function toggleIcon (){
-/* const icon = this.paused ? console.log("play icon") : console.log("pause icon"); */
-const icon = this.paused ? '►' : '❚ ❚';
-playPauseButton.innerHTML = icon
+    /* const icon = this.paused ? console.log("play icon") : console.log("pause icon"); */
+    const icon = this.paused ? '►' : '❚ ❚';
+    playPauseButton.innerHTML = icon
+}
 
+function handleSkip () {
+    console.log('this :>> ', this.dataset.skip);
+    const skipTime = parseFloat(this.dataset.skip)
+    viewer.currentTime += skipTime
 }
 
 // fire function thanks to event listners
@@ -31,3 +37,7 @@ viewer.addEventListener('play', toggleIcon)
 viewer.addEventListener('pause', toggleIcon)
 
 playPauseButton.addEventListener('click', togglePlay)
+
+skipButtons.forEach( skipButton => {
+    skipButton.addEventListener('click', handleSkip)
+})
