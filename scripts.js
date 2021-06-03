@@ -6,7 +6,9 @@ const viewer = player.querySelector('.viewer')
 const playPauseButton = player.querySelector('.toggle')
 /* console.log('playPauseButton :>> ', {playPauseButton}); */
 const skipButtons = player.querySelectorAll('[data-skip]')
-console.log('skipButtons :>> ', {skipButtons});
+/* console.log('skipButtons :>> ', {skipButtons}); */
+const rangers = player.querySelectorAll('.player__slider');
+console.log('rangers :>> ', rangers);
 
 
 // define functions
@@ -31,6 +33,11 @@ function handleSkip () {
     viewer.currentTime += skipTime
 }
 
+function handleChange () {
+    viewer[this.name] = this.value
+    
+}
+
 // fire function thanks to event listners
 viewer.addEventListener('click', togglePlay)
 viewer.addEventListener('play', toggleIcon)
@@ -40,4 +47,8 @@ playPauseButton.addEventListener('click', togglePlay)
 
 skipButtons.forEach( skipButton => {
     skipButton.addEventListener('click', handleSkip)
+})
+
+rangers.forEach( ranger => {
+    ranger.addEventListener('change', handleChange)
 })
