@@ -12,7 +12,9 @@ const rangers = player.querySelectorAll('.player__slider');
 const progressBar = player.querySelector('.progress__filled');
 /* console.log('progressBar :>> ', progressBar); */
 const totalProgress = player.querySelector('.progress')
-console.log('totalProgress :>> ', {totalProgress});
+/* console.log('totalProgress :>> ', {totalProgress}); */
+const fullScreenButton = player.querySelector('.fullScreen__Button')
+console.log('fullScreenButton :>> ', {fullScreenButton});
 
 
 // define functions
@@ -53,6 +55,11 @@ function scrub (e) {
     viewer.currentTime = scrubTime
 }
 
+function handleFullScreen () {
+    console.log('FUll ');
+    viewer.requestFullscreen()
+}
+
 // fire function thanks to event listners
 viewer.addEventListener('click', togglePlay)
 viewer.addEventListener('play', toggleIcon)
@@ -75,4 +82,5 @@ totalProgress.addEventListener('mousemove', (e) => clikDown && scrub(e))
 totalProgress.addEventListener('mousedown', () => clikDown =true)
 totalProgress.addEventListener('mouseup', () => clikDown = false)
 
+fullScreenButton.addEventListener('click', handleFullScreen)
 
